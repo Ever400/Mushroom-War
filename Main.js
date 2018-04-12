@@ -4,8 +4,8 @@ var gameScene = new Phaser.Scene('Game');
 // our game's configuration
 var config = {
   type: Phaser.AUTO,  //Phaser will decide how to render our game (WebGL or Canvas)
-  width: 1000, // game width
-  height: 530, // game height
+  width: 736, // game width
+  height: 427, // game height
   scene: gameScene // our newly created scene
 };
  
@@ -15,7 +15,7 @@ var game = new Phaser.Game(config);
 gameScene.preload = function() {
   
     // load images
-    this.load.image('background', 'War/Maps/egyptmap.png');
+    this.load.image('background', 'War/Maps/village map.jpg');
     this.load.image('Player', 'War/Character/Shiitake.png');
     
     this.load.image('background', 'War/Maps/MapO1.png');
