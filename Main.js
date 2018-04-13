@@ -1,9 +1,9 @@
 var mainState = {
     preload: function () {
 		game.load.image('player', 'War/Character/Shiitake.png');
-        game.load.image('wall', 'War/Maps/items_for_map/dirt.jpg');
-      //  game.load.image('coin', 'assets/coin.png');
-       // game.load.image('enemy', 'assets/lava.png');
+        game.load.image('wall', 'War/Maps/items_for_map/platforms (2).jpg');
+        game.load.image('coin', 'War/Maps/items_for_map/grass.jpg');
+        game.load.image('enemy', 'War/Maps/items_for_map/dirt.jpg');
     },
 
     
@@ -11,7 +11,7 @@ var mainState = {
         
         game.world.setBounds(0, 0, 50000, 10000);
         //change the game's background color 
-        game.stage.backgroundImage = "GitHub/Banana-lava-game/assets/volcan.png";
+        game.stage.backgroundImage = "War/Maps/items_for_map/maxresdefault.jpg";
         //start physics system for movements and collisions
         game.physics.startSystem(Phaser.Physics.ARCADE);
         //add hte physics engine to all the game objects
