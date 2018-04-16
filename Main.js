@@ -4,7 +4,7 @@ var mainState = {
         game.load.image('wall', 'War/Maps/items_for_map/platforms (2).jpg');
         game.load.image('coin', 'War/Maps/items_for_map/grass.jpg');
         game.load.image('enemy', 'War/Maps/items_for_map/dirt.jpg');
-  
+        game.load.image('Background', 'War/Maps/items_for_map/maxresdefault.jpg')
     
         this.background = this.add.sprite(350, 174.9, 'background');
     },
