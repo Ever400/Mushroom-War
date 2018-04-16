@@ -4,8 +4,11 @@ var mainState = {
         game.load.image('wall', 'War/Maps/items_for_map/platforms (2).jpg');
         game.load.image('coin', 'War/Maps/items_for_map/grass.jpg');
         game.load.image('enemy', 'War/Maps/items_for_map/dirt.jpg');
+  
+    
+        this.background = this.add.sprite(350, 174.9, 'background');
     },
-
+        
     
     create: function(){
         
@@ -16,7 +19,6 @@ var mainState = {
         game.physics.startSystem(Phaser.Physics.ARCADE);
         //add hte physics engine to all the game objects
         game.world.enableBody = true;
-        
         this.cursor = game.input.keyboard.createCursorKeys();
         
         //creates player in the center of the game 
