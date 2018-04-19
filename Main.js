@@ -2,9 +2,10 @@ var mainState = {
     preload: function () {
 		game.load.image('player', 'War/Character/Shiitake.png');
         game.load.image('wall', 'War/Maps/items_for_map/platforms (2).jpg');
-        game.load.image('coin', 'War/Maps/items_for_map/grass.jpg');
-        game.load.image('enemy', 'War/Maps/items_for_map/dirt.jpg');
+        game.load.image('sky', 'War/background/cuadros.jpg');
+        game.load.image('dirt', 'War/Maps/items_for_map/dirt.jpg');
         game.load.image('Background', 'War/Maps/items_for_map/maxresdefault.jpg')
+        game.load.image('enemy', 'War/Character/Bracolli.png')
     },
     
     
@@ -21,15 +22,17 @@ var mainState = {
         game.world.enableBody = true;
         
         this.cursor = game.input.keyboard.createCursorKeys();
-        
+        this.cursor = game.input.keyboard.addKeys( { 'up': Phaser.KeyCode.W, 'down': Phaser.KeyCode.S, 'left': Phaser.KeyCode.A, 'right': Phaser.KeyCode.D } );
+        s = game.add.tileSprite(0, 0, 50000, 10000, 'Background');
         //creates player in the center of the game 
         this.player = game.add.sprite(70, 100, 'player');
         
         this.player.body.gravity.y = 500;
         
         this.floor = game.add.group();
-        this.coins = game.add.group();
-        this.enemies = game.add.group();
+        this.sky = game.add.group();
+        this.dirt = game.add.group();
+        this.createtime = Date.now()
         
         game.camera.follow(this.player);
         
@@ -37,10 +40,9 @@ var mainState = {
 
 // Create 3 groups that will contain our objects
 		this.walls = game.add.group();
-		this.coins = game.add.group();
-		this.enemies = game.add.group();
+		
 
-// Design the level. x = wall, o = coin, ! = lava.
+// Design the level. x = wall, o = sky, ! = lava.
 var level = [
 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
 'x                                                                                                                                                                                                                 x',
@@ -59,13 +61,13 @@ var level = [
 'x                                                                                                                                                                                                                 x',
 'x                                                                                                                                                                                                                 x',
 'x                                                                                                                                                                                                                 x',
-'x                                                                                                                                                                                 o           xx!!!!!!!x          x',
-'x                                                                                                                                                 o         xx!!!!!!!!!!xx                                        x',
-'x                                                                                     oo               xx!!!!!!!!!!x!!!!!!!!!!!x!!!!!!!!!!xx                                                                                                 x',
-'x            o                                                               x!!!!!!!!!!!!!!!!!xxxxx                                                                                                                                   x', 
-'x         o                                                                 xx!!!!!!!!!!!!!!!!!xx                                                                                                                                      x', 
-'x        x!!!!!!!!x                                  o                     xxx!!!!!!!!!!!!!!!!!xxx                                                                                              ooo                                    x', 
-'x       xx!!!!!!!!xx               !   o   !        !!!                   xxxx!!!!!!!!!!!!!!!!!xxxx                       ooo                                                                                                          x',
+'x                                                                                                                                                                                             xx!!!!!!!x          x',
+'x                                                                                                                                                           xx!!!!!!!!!!xx                                        x',
+'x                                                                                                      xx!!!!!!!!!!x!!!!!!!!!!!x!!!!!!!!!!xx                                                                                                 x',
+'x                                                                            x!!!!!!!!!!!!!!!!!xxxxx                                                                                                                                   x', 
+'x                                                                           xx!!!!!!!!!!!!!!!!!xx                                                                                                                                      x', 
+'x        x!!!!!!!!x                                                        xxx!!!!!!!!!!!!!!!!!xxx                                                                                                                                     x', 
+'x       xx!!!!!!!!xx               !       !        !!!                   xxxx!!!!!!!!!!!!!!!!!xxxx                                                                                                                                    x',
 'xxxxxxxxxx!!!!!!!!xxxxxxxxxxxxxxxx!!!xxxxx!!!x!!!!!!!!!!!!!!!xxxxxxxxxxxxxxxxx!!!!!!!!!!!!!!!!!xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx!!!!!!!!!xxxxxxx!!!!!!!!xxx!!!!!!!!!x!!!!!!!!!!!!!!!xxxxxxxxxxxxxxxxxxx',
 'x!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!x',
 'x!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!x',
@@ -93,21 +95,22 @@ for (var i = 0; i < level.length; i++) {
 
 // Create a wall and add it to the 'walls' group
 if (level[i][j] == 'x') {
-var wall = game.add.sprite(30+20*j, 30+20*i, 'wall');
+var wall = game.add.sprite(0+20*j, 0+20*i, 'wall');
 this.walls.add(wall);
 wall.body.immovable = true;
 }
 
 // Create a coin and add it to the 'coins' group
-else if (level[i][j] == 'o') {
-var coin = game.add.sprite(30+20*j, 30+20*i, 'coin');
-this.coins.add(coin);
+else if (level[i][j] == 'm') {
+var sky = game.add.sprite(0+20*j, 0+20*i, 'sky');
+this.sky.add(sky);
 }
 
 // Create a enemy and add it to the 'enemies' group
  else if (level[i][j] == '!') {
-var enemy = game.add.sprite(30+20*j, 30+20*i, 'enemy');
-this.enemies.add(enemy);
+var dirt = game.add.sprite(0+20*j, 0+20*i, 'dirt');
+this.dirt.add(dirt);
+     dirt.body.immovable = true;
       }
  
    }
@@ -115,11 +118,14 @@ this.enemies.add(enemy);
     },
         
     update: function(){
+        if (Date.now()-this.createtime >15*1000) {
+            game.add.sprite(0,5000, 'enemy')
+            this.createtime = Date.now()
+        }
         game.physics.arcade.collide(this.player,this.walls);
+        game.physics.arcade.collide(this.player,this.dirt); 
         
-        game.physics.arcade.overlap(this.player,this.coins, this.takeCoin, null, this);
-        
-        game.physics.arcade.overlap(this.player, this.enemies, this.restart, null, this);
+    
         
         if(this.cursor.left.isDown){
             this.player.body.velocity.x = -200;
@@ -134,13 +140,8 @@ this.enemies.add(enemy);
         }
     },
     
-    takeCoin: function(player, coin){
-        coin.kill();
-    },
-    
-    restart: function(){
-        game.state.start('main');
-    }
+   
+   
 };
 
 var game = new Phaser.Game(1500,900);
