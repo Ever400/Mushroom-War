@@ -12,6 +12,25 @@ var mainState = {
     
     
     create: function(){
+        /*
+        
+var i=1;
+var nextSong= "";
+function setup() {
+    document.getElementById('audio').addEventListener('ended', function(){
+        i++;
+        nextSong = "Music/"+i+".mp3";
+        audioPlayer = document.getElementById('audio');
+        audioPlayer.src = nextSong;
+        audioPLayer.load();
+        audioPlayer.play();
+        if(i == 37) // this is the end of the songs.
+        {
+            i = 1;
+        }
+        }, false);
+}
+        */
         
         game.world.setBounds(0, 0, 50000, 10000);
         //change the game's background color 
