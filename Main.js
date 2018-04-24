@@ -4,7 +4,7 @@ var mainState = {
         game.load.image('wall', 'War/Maps/items_for_map/platforms (2).jpg');
         game.load.image('sky', 'War/background/cuadros.jpg');
         game.load.image('dirt', 'War/Maps/items_for_map/dirt.jpg');
-        game.load.image('Background', 'War/Maps/items_for_map/maxresdefault.jpg')
+        game.load.image('Background', 'War/background/lava.jpg')
         game.load.image('enemy', 'War/Character/Bracolli.png')
     },
     
@@ -15,7 +15,7 @@ var mainState = {
         
         game.world.setBounds(0, 0, 50000, 10000);
         //change the game's background color 
-        game.stage.backgroundImage = "War/Maps/items_for_map/maxresdefault.jpg";
+        game.stage.backgroundImage = "War/background/lava.jpg";
         //start physics system for movements and collisions
         game.physics.startSystem(Phaser.Physics.ARCADE);
         //add hte physics engine to all the game objects
