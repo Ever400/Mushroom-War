@@ -2,3 +2,37 @@ p {
     background-color: powderblue;
     color: palegoldenrod;
 }
+
+
+.container{
+    
+    position: relative;
+    text-align: center;
+}
+
+
+text-size1{
+    
+    font-size: 40;
+    color: greenyellow;
+}
+
+text-size1{
+    
+    font-size: 40;
+    color: greenyellow;
+}
+.redsquare {
+    position: absolute;
+    bottom: 160px;
+    left: 180px;   
+    
+}
+
+
+.greensquare{
+    position: absolute;
+    bottom: 490px;
+    left: 520px; 
+    font-size: 60;
+}
