@@ -1,52 +1,24 @@
 <html>
     <head>
-<script src="//cdn.jsdelivr.net/npm/phaser@3.2.1/dist/phaser.js"></script>
+
+        <title> Mushroom vs. Brocolli War </title>
+        <h1> Mushroom vs. Brocolli War</h1>
+
+      <script src = "phaser.min.js"></script>
+      <script src = "main.js"></script>
+        <audio controls autoplay>
+          <source src="War/Music/americanidiot.m4a" type="audio/mpeg">
+           
+        Your browser does not support the audio element.
+        </audio>
+        <audio controls>
+            <source src="War/Music/ghostbusters.m4a" type="audio/mpeg">
+            <source src="War/Music/hillswk.m4a" type="audio/mpeg">
+        Your browser does not support the audio element.
+        </audio>
     </head>
-<body>
-    <script type ="text/javascript">
-        // create a new scene named "Game"
-var gameScene = new Phaser.Scene('Game');
- 
-// our game's configuration
-var config = {
-  type: Phaser.AUTO,  //Phaser will decide how to render our game (WebGL or Canvas)
-  width: 700, // game width
-  height: 350, // game height
-  scene: gameScene // our newly created scene
-};
- 
-// create the game, and pass it the configuration
-var game = new Phaser.Game(config);
-// load asset files for our game
-gameScene.preload = function() {
-  
-    // load images
-    this.load.image('Player', 'War/Character/Shiitake.png');
     
-    this.load.image('background', 'War/Maps/MapO1.png');
-};
-
-var player;// = new Character(game);
- 
-// executed once, after assets were loaded
-gameScene.create = function() {
- 
-    // background
-    this.background = this.add.sprite(350, 174.9, 'background');
-    this.player = this.add.sprite(300, 200, 'Player')
- 
-    //Scale
     
-    this.player.setScale(0.12);
-    
-    this.background.setScale(1);
-}
-
-gameScene.update = function() {
- 
-}
-
-    </script>
-    </body>
-        
+   <body>
+   </body>
 </html>
