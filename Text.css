@@ -1,4 +1,43 @@
-p {
-    background-color: powderblue;
-    color: palegoldenrod;
+b {
+    color: blue;
+
+}
+
+BioSize{
+    
+    font-size: 24;
+    
+}
+
+
+.container{
+    
+    position: relative;
+    text-align: center;
+}
+
+
+.graysquare{
+    position: absolute;
+    bottom: 120px;
+    left: 670;   
+    font-size: 40;
+    color: greenyellow;
+}
+
+
+.redsquare {
+    position: absolute;
+    bottom: 120px;
+    left: 180px;   
+    font-size: 40;
+    color: greenyellow;
+    
+}
+
+.greensquare{
+    position: absolute;
+    bottom: 490px;
+    left: 520px; 
+    font-size: 60;
 }
