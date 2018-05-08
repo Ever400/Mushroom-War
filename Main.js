@@ -1,8 +1,34 @@
+<<<<<<< HEAD
  var speed = 10000;
 var kNumEnemies = 20;
 var win = false;
+=======
+ var speed = 1;
+
+function setup() {
+    var i=1;
+    var nextSong= "";
+    // alert(document.getElementById('Music'));
+    document.getElementById('Music').addEventListener('ended', function(){
+        i++;
+        nextSong = "War/Music/"+i+".m4a";
+        audioPlayer = document.getElementById('Music');
+        // alert(nextSong);
+        audioPlayer.src = nextSong;
+        audioPLayer.load();
+        audioPlayer.play();
+        if(i == 37) 
+        {
+            i = 1;
+        }
+        }, false);
+}
+
+>>>>>>> a8376b5f080a04fcc3ec5e2ec13832ba5262306c
 var mainState = {
     preload: function () {
+        // setup();
+        
 		game.load.image('player', 'War/Character/Shiitake.png');
         game.load.image('wall', 'War/Maps/items_for_map/platforms (2).jpg');
         game.load.image('sky', 'War/background/cuadros.jpg');
@@ -15,6 +41,7 @@ var mainState = {
     
     
     create: function(){
+<<<<<<< HEAD
         
         
 var i=1;
@@ -33,6 +60,11 @@ function setup() {
         }
         }, false);
 }
+=======
+        
+        
+ 
+>>>>>>> a8376b5f080a04fcc3ec5e2ec13832ba5262306c
         
         
         game.world.setBounds(0, 0, 40000, 40000);
