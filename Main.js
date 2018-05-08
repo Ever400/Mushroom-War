@@ -1,4 +1,6 @@
- var speed = 1;
+ var speed = 10000;
+var kNumEnemies = 20;
+var win = false;
 var mainState = {
     preload: function () {
 		game.load.image('player', 'War/Character/Shiitake.png');
@@ -13,7 +15,7 @@ var mainState = {
     
     
     create: function(){
-        /*
+        
         
 var i=1;
 var nextSong= "";
@@ -31,9 +33,9 @@ function setup() {
         }
         }, false);
 }
-        */
         
-        game.world.setBounds(0, 0, 50000, 10000);
+        
+        game.world.setBounds(0, 0, 40000, 40000);
         //change the game's background color 
         game.stage.backgroundImage = "War/background/lava.jpg";
         //start physics system for movements and collisions
@@ -43,11 +45,22 @@ function setup() {
         
         this.cursor = game.input.keyboard.createCursorKeys();
         this.cursor = game.input.keyboard.addKeys( { 'up': Phaser.KeyCode.W, 'down': Phaser.KeyCode.S, 'left': Phaser.KeyCode.A, 'fast': Phaser.KeyCode.SHIFT, 'right': Phaser.KeyCode.D } );
-        s = game.add.tileSprite(0, 0, 50000, 10000, 'Background');
+        s = game.add.tileSprite(0, 0, 23345, 23345, 'Background');
         //creates player in the center of the game 
         this.player = game.add.sprite(70, 100, 'player');
+        this.enemies = [];
+        for (var i = 0; i < kNumEnemies; ++i) {
+          var enemy = game.add.sprite(40, 40, 'enemy');
+          // Enemy Size.
+          enemy.scale.setTo(0.6, 0.6);
+          enemy.body.gravity.y = 250;
+          // Enemy x coordinate.
+          enemy.x = 240* (i + 1);
+          this.enemies.push(enemy);
+        }
         
         this.player.body.gravity.y = 500;
+        
         
         this.floor = game.add.group();
         this.sky = game.add.group();
@@ -137,13 +150,31 @@ function setup() {
         }
     },
         
-    update: function(){
+    update: function(){  
+        if (this.player.x > 4100 && win == false) {
+            win = true;
+        
+            
+        }
+        
+        function Die() {
+            this.player.alive = false; 
+        }
+        
+        for (i = 0; i < kNumEnemies; ++i) {
+          this.enemies[i].x += (Math.random() - 0.5) * 10;
+          game.physics.arcade.collide(this.enemies[i],this.dirt); 
+          game.physics.arcade.collide(this.player, this.enemies[i], Die);
+        }
+        
         if (Date.now()-this.createtime >15*1000) {
             game.add.sprite(0,5000, 'enemy')
             this.createtime = Date.now()
         }
         game.physics.arcade.collide(this.player,this.walls);
         game.physics.arcade.collide(this.player,this.dirt); 
+        
+         
         
     
         if(this.cursor.fast.isDown){
