@@ -1,8 +1,6 @@
-<<<<<<< HEAD
  var speed = 10000;
 var kNumEnemies = 20;
 var win = false;
-=======
  var speed = 1;
 
 function setup() {
@@ -24,7 +22,6 @@ function setup() {
         }, false);
 }
 
->>>>>>> a8376b5f080a04fcc3ec5e2ec13832ba5262306c
 var mainState = {
     preload: function () {
         // setup();
@@ -41,31 +38,8 @@ var mainState = {
     
     
     create: function(){
-<<<<<<< HEAD
         
-        
-var i=1;
-var nextSong= "";
-function setup() {
-    document.getElementById('audio').addEventListener('ended', function(){
-        i++;
-        nextSong = "Music/"+i+".mp3";
-        audioPlayer = document.getElementById('audio');
-        audioPlayer.src = nextSong;
-        audioPLayer.load();
-        audioPlayer.play();
-        if(i == 37) // this is the end of the songs.
-        {
-            i = 1;
-        }
-        }, false);
-}
-=======
-        
-        
- 
->>>>>>> a8376b5f080a04fcc3ec5e2ec13832ba5262306c
-        
+              
         
         game.world.setBounds(0, 0, 40000, 40000);
         //change the game's background color 
