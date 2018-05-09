@@ -19,7 +19,7 @@ BioSize{
 
 .graysquare{
     position: absolute;
-    bottom: 120px;
+    bottom: 40px;
     left: 670;   
     font-size: 40;
     color: greenyellow;
@@ -28,7 +28,7 @@ BioSize{
 
 .redsquare {
     position: absolute;
-    bottom: 120px;
+    bottom: 40px;
     left: 180px;   
     font-size: 40;
     color: greenyellow;
@@ -37,7 +37,7 @@ BioSize{
 
 .greensquare{
     position: absolute;
-    bottom: 490px;
+    bottom: 400px;
     left: 520px; 
     font-size: 60;
 }

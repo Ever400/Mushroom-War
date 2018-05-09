@@ -32,6 +32,7 @@ var mainState = {
         game.load.image('dirt', 'War/Maps/items_for_map/dirt.jpg');
         game.load.image('Background', 'War/background/lava.jpg')
         game.load.image('enemy', 'War/Character/Bracolli.png')
+        game.load.image('laser', 'War/Weapon/laser.png')
     },
     
     
@@ -50,7 +51,7 @@ var mainState = {
         game.world.enableBody = true;
         
         this.cursor = game.input.keyboard.createCursorKeys();
-        this.cursor = game.input.keyboard.addKeys( { 'up': Phaser.KeyCode.W, 'down': Phaser.KeyCode.S, 'left': Phaser.KeyCode.A, 'fast': Phaser.KeyCode.SHIFT, 'right': Phaser.KeyCode.D } );
+        this.cursor = game.input.keyboard.addKeys( { 'up': Phaser.KeyCode.W, 'down': Phaser.KeyCode.S, 'left': Phaser.KeyCode.A, 'fast': Phaser.KeyCode.SHIFT, 'right': Phaser.KeyCode.D,'shoot': Phaser.KeyCode.j } );
         s = game.add.tileSprite(0, 0, 23345, 23345, 'Background');
         //creates player in the center of the game 
         this.player = game.add.sprite(70, 100, 'player');
@@ -61,9 +62,13 @@ var mainState = {
           enemy.scale.setTo(0.6, 0.6);
           enemy.body.gravity.y = 250;
           // Enemy x coordinate.
-          enemy.x = 240* (i + 1);
+          enemy.x = 340* (i + 3);
           this.enemies.push(enemy);
         }
+        this.laser = game.add.sprite('laser'); 
+           
+        
+        
         
         this.player.body.gravity.y = 500;
         
@@ -98,8 +103,8 @@ var mainState = {
         'x                                                                                                                                                                                                                 x',
         'x                                                                                                                                                                       x                                         x',
         'x                                                                                                                                                                                                                 x',
-        'x                                                                                                                                                                                                                 x',
-        'x                                                                                                                                                                                                                 x',
+        'x                                                                                                               x                                                                                                 x',
+        'x                                                                             x                                                                                                                                   x',
         'x                                                                                                                                                                                             xx!!!!!!!x          x',
         'x                                                                                                                                                           xx!!!!!!!!!!xx                   x!                   x',
         'x                                                                                                      xx!!!!!!!!!!x!!!!!!!!!!!x!!!!!!!!!!xx               x!                             x!                      x',
@@ -181,6 +186,11 @@ var mainState = {
         game.physics.arcade.collide(this.player,this.dirt); 
         
          
+        
+        if(this.cursor.shoot.isDown){
+            this.laser.body.velocity.x > -200
+        }
+        
         
     
         if(this.cursor.fast.isDown){
